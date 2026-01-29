@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5" style="max-width:500px">
+  <h4 class="mb-3">Create Post</h4>
+
+  <!-- UPDATED FORM USING PostForm -->
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary w-100">Post</button>
+  </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+  <!-- ================= ACTION BUTTONS ================= -->
+  <div class="d-flex justify-content-end gap-2 mb-4">
+    <!-- Create Story -->
+    <a href="{% url 'posts:create_story' %}" class="btn btn-outline-info fw-bold">
+      📖 Create Story
+    </a>
+
+    <!-- Create Post -->
+    <a href="{% url 'posts:create_post' %}" class="btn btn-outline-primary fw-bold">
+      ✍️ Create Post
+    </a>
+  </div>
+
+  <div class="col-md-9 mx-auto">
+
+    <!-- ================= STORIES ================= -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h6 class="fw-bold mb-3">📚 All Stories</h6>
+        <div class="d-flex gap-3 overflow-auto">
+
+          {% for story in stories %}
+          <div class="text-center">
+            <a href="{% url 'posts:story_view' story.id %}">
+              {% if story.image %}
+                <img src="{{ story.image.url }}" class="rounded-circle border" width="70" height="70" style="object-fit:cover">
+              {% elif story.video %}
+                <video class="rounded-circle border" width="70" height="70" style="object-fit:cover" muted autoplay loop>
+                  <source src="{{ story.video.url }}">
+                </video>
+              {% endif %}
+            </a>
+            <div class="mt-1 small">
+              <a href="{% url 'accounts:profile' story.user.username %}" class="text-decoration-none text-dark fw-bold">
+                {{ story.user.username }}
+              </a>
+            </div>
+          </div>
+          {% empty %}
+            <p class="text-muted">No stories yet</p>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= POSTS ================= -->
+    {% for post in posts %}
+    <div class="card mb-4 shadow-sm rounded-3">
+      <div class="card-body">
+
+        <!-- USERNAME -->
+        <a href="{% url 'accounts:profile' post.author.username %}" class="fw-bold text-dark text-decoration-none">
+          👤 {{ post.author.username }}
+        </a>
+
+        <!-- POST CONTENT -->
+        {% if post.content %}
+          <p class="mt-2">{{ post.content }}</p>
+        {% endif %}
+
+        <!-- POST IMAGE -->
+        {% if post.image %}
+          <img src="{{ post.image.url }}" class="img-fluid rounded mb-2">
+        {% endif %}
+
+        <!-- POST VIDEO -->
+        {% if post.video %}
+          <video controls class="w-100 rounded mb-2">
+            <source src="{{ post.video.url }}">
+            Your browser does not support the video tag.
+          </video>
+        {% endif %}
+
+        <!-- ACTION BUTTONS -->
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <!-- LIKE -->
+          <button class="btn btn-light btn-sm p-1 like-btn" data-id="{{ post.id }}">
+            ❤️ <span id="like-count-{{ post.id }}">{{ post.likes.count }}</span>
+          </button>
+
+          <!-- COMMENT -->
+          <button class="btn btn-light btn-sm p-1 comment-btn" data-id="{{ post.id }}" data-bs-toggle="modal" data-bs-target="#commentModal">
+            💬
+          </button>
+
+          <!-- EDIT / DELETE -->
+          {% if user == post.author %}
+            <a href="{% url 'posts:edit_post' post.id %}" class="btn btn-light btn-sm p-1">✏️</a>
+            <a href="{% url 'posts:delete_post' post.id %}" class="btn btn-light btn-sm p-1" onclick="return confirm('Are you sure?');">🗑️</a>
+          {% endif %}
+        </div>
+
+        <p class="text-muted small">⏰ {{ post.created|timesince }} ago</p>
+
+      </div>
+    </div>
+    {% empty %}
+      <p class="text-center text-muted">No posts yet</p>
+    {% endfor %}
+
+  </div>
+</div>
+
+<!-- ================= COMMENT MODAL ================= -->
+<div class="modal fade" id="commentModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">💬 Comments</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <div id="modal-comments-list" class="mb-3" style="max-height:300px; overflow-y:auto;"></div>
+
+        <!-- ADD COMMENT FORM -->
+        <form id="modal-comment-form">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Add a comment..." name="text" required>
+            <button class="btn btn-primary" type="submit">📨 Post</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+<script>
+const csrftoken = document.cookie.split(';').find(c => c.trim().startsWith('csrftoken=')).split('=')[1];
+
+// LIKE BUTTON AJAX
+document.addEventListener("click", function(e){
+  const btn = e.target.closest(".like-btn");
+  if(!btn) return;
+
+  fetch(`/posts/toggle-like/${btn.dataset.id}/`, {
+    method: "POST",
+    headers: {"X-CSRFToken": csrftoken}
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById(`like-count-${btn.dataset.id}`).innerText = data.count;
+  });
+});
+
+// COMMENT MODAL
+let currentPostId = null;
+const modalCommentsList = document.getElementById("modal-comments-list");
+const modalCommentInput = document.querySelector("#modal-comment-form input[name='text']");
+
+document.querySelectorAll(".comment-btn").forEach(btn=>{
+  btn.addEventListener("click", function(){
+    currentPostId = this.dataset.id;
+    modalCommentsList.innerHTML = "Loading...";
+
+    fetch(`/posts/get_comments/${currentPostId}/`)
+      .then(res => res.json())
+      .then(data => {
+        modalCommentsList.innerHTML = '';
+        if(data.comments.length === 0){
+          modalCommentsList.innerHTML = '<p class="text-muted">No comments yet</p>';
+        } else {
+          data.comments.forEach(c => {
+            const div = document.createElement("div");
+            div.classList.add("mb-2");
+            div.innerHTML = `<b>👤 ${c.username}</b>: ${c.text}`;
+            modalCommentsList.appendChild(div);
+          });
+        }
+
+        modalCommentsList.scrollTop = modalCommentsList.scrollHeight;
+        modalCommentInput.focus();
+      });
+  });
+});
+
+// ADD COMMENT AJAX
+document.getElementById("modal-comment-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  if(!currentPostId) return;
+
+  const input = modalCommentInput;
+
+  fetch(`/posts/add-comment/${currentPostId}/`, {
+    method: "POST",
+    headers:{
+      "X-CSRFToken": csrftoken,
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `text=${encodeURIComponent(input.value)}`
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.error){
+      alert("Failed to post comment");
+      return;
+    }
+
+    const div = document.createElement("div");
+    div.classList.add("mb-2");
+    div.innerHTML = `<b>👤 ${data.username}</b>: ${data.text}`;
+    modalCommentsList.appendChild(div);
+
+    modalCommentsList.scrollTop = modalCommentsList.scrollHeight;
+    input.value = "";
+    input.focus();
+  });
+});
+
+// Auto-focus input on modal open
+const commentModal = document.getElementById('commentModal');
+commentModal.addEventListener('shown.bs.modal', function () {
+  modalCommentInput.focus();
+});
+</script>
+
+{% endblock %}

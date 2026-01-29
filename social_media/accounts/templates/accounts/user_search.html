@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h4>Search Results</h4>
+<hr>
+
+{% for user in users %}
+<div class="d-flex align-items-center justify-content-between mb-2"
+     id="user-{{ user.id }}">
+
+  <div class="d-flex align-items-center">
+    <a href="{% url 'accounts:profile' user.username %}">
+      <img src="{{ user.profile.image.url }}"
+           class="rounded-circle me-2"
+           width="40" height="40"
+           style="object-fit:cover;">
+    </a>
+
+    <a href="{% url 'accounts:profile' user.username %}"
+       class="fw-semibold text-decoration-none">
+      {{ user.username }}
+    </a>
+  </div>
+
+  {% if user != request.user %}
+  <button
+    class="btn btn-sm follow-btn
+    {% if user.id in following_ids %}
+      btn-success
+    {% else %}
+      btn-outline-success
+    {% endif %}"
+    data-user-id="{{ user.id }}">
+
+    {% if user.id in following_ids %}
+      Following
+    {% else %}
+      Follow
+    {% endif %}
+  </button>
+  {% endif %}
+</div>
+{% empty %}
+<p class="text-muted">No users found.</p>
+{% endfor %}
+
+<!-- ✅ LOAD JS HERE (NO BLOCK) -->
+<script src="{% static 'js/follow.js' %}"></script>
+
+{% endblock %}

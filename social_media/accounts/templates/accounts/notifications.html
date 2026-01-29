@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-3" style="max-width: 600px;">
+
+  <h4 class="mb-3">Suggestions</h4>
+  <hr>
+
+  {% for user in users %}
+    <div class="d-flex align-items-center p-2 mb-2 rounded"
+         style="background:#f8f9fa;">
+
+      <!-- PROFILE IMAGE -->
+      <img
+        src="{{ user.profile.image.url }}"
+        alt="{{ user.username }}"
+        class="rounded-circle me-3"
+        width="50"
+        height="50"
+        style="object-fit: cover;"
+      >
+
+      <!-- USERNAME -->
+      <a
+        href="{% url 'accounts:profile' user.username %}"
+        class="fw-semibold text-dark text-decoration-none"
+      >
+        {{ user.username }}
+      </a>
+
+    </div>
+  {% empty %}
+    <p class="text-muted text-center">No suggestions available</p>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

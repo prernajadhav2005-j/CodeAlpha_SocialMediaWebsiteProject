@@ -1,0 +1,27 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+}
+
+.sidebar {
+    background: #fff;
+    height: 100vh;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar a {
+    color: #000;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    color: #198754;
+}
+
+.right-panel {
+    background: #f8f9fa;
+    height: 100vh;
+}
+
+.card {
+    border-radius: 10px;
+}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5" style="max-width:400px">
+  <h4 class="mb-3">Create Story</h4>
+
+  <!-- UPDATED FORM (StoryForm integrated) -->
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <button type="submit" class="btn btn-info w-100">Upload Story</button>
+  </form>
+</div>
+
+{% endblock %}

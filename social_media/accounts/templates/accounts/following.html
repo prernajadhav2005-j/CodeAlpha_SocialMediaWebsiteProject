@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4" style="max-width:500px">
+
+  <h4 class="mb-3">
+    {{ profile_user.username }} is following
+  </h4>
+
+  <hr>
+
+  {% for f in following %}
+  <div class="d-flex align-items-center mb-3">
+
+    <img src="{{ f.following.profile.image.url }}"
+         class="rounded-circle me-3"
+         width="45" height="45"
+         style="object-fit:cover">
+
+    <a href="{% url 'accounts:profile' f.following.username %}"
+       class="fw-semibold text-decoration-none">
+      {{ f.following.username }}
+    </a>
+
+  </div>
+  {% empty %}
+    <p class="text-muted">Not following anyone</p>
+  {% endfor %}
+
+</div>
+
+{% endblock %}

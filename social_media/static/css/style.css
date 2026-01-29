@@ -1,0 +1,106 @@
+/* =======================
+   FEED CONTAINER
+======================= */
+.feed-container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+/* =======================
+   CREATE POST
+======================= */
+/* CREATE POST CARD */
+.create-post-card {
+  border-radius: 12px;
+}
+
+/* TEXTAREA HEIGHT */
+.create-post-textarea {
+  min-height: 120px;   /* 👈 Increase height here */
+  resize: vertical;    /* User can resize */
+  font-size: 15px;
+  padding: 12px;
+}
+
+/* OPTIONAL: better spacing on mobile */
+@media (max-width: 768px) {
+  .create-post-textarea {
+    min-height: 100px;
+  }
+}
+
+
+/* =======================
+   POST CARD
+======================= */
+/* CREATE POST CARD */
+.create-post-card {
+  border-radius: 12px;
+}
+
+/* TEXTAREA HEIGHT */
+.create-post-textarea {
+  min-height: 120px;   /* 👈 Increase height here */
+  resize: vertical;    /* User can resize */
+  font-size: 15px;
+  padding: 12px;
+}
+
+/* OPTIONAL: better spacing on mobile */
+@media (max-width: 768px) {
+  .create-post-textarea {
+    min-height: 100px;
+  }
+}
+
+.post-card {
+    background: white;
+    padding: 16px;
+    margin-top: 18px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.post-header strong {
+    color: #333;
+}
+
+/* =======================
+   NO POSTS
+======================= */
+.no-posts {
+    text-align: center;
+    color: #777;
+    margin-top: 40px;
+    font-size: 15px;
+}
+
+/* =======================
+   LOGOUT BUTTON
+======================= */
+.logout-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.logout-btn:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5" style="max-width: 500px;">
+  <div class="card shadow-lg border-0 rounded-3">
+    <div class="card-body p-4">
+
+      <h3 class="text-center mb-4 fw-bold">Create an Account</h3>
+
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <!-- Username -->
+        <div class="mb-3">
+          <label for="{{ form.username.id_for_label }}" class="form-label">
+            <strong>{{ form.username.label }}</strong>
+          </label>
+          {{ form.username }}
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="{{ form.email.id_for_label }}" class="form-label">
+            <strong>{{ form.email.label }}</strong>
+          </label>
+          {{ form.email }}
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="{{ form.password.id_for_label }}" class="form-label">
+            <strong>{{ form.password.label }}</strong>
+          </label>
+          {{ form.password }}
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-3">
+          <label for="{{ form.confirm_password.id_for_label }}" class="form-label">
+            <strong>{{ form.confirm_password.label }}</strong>
+          </label>
+          {{ form.confirm_password }}
+        </div>
+
+        <!-- Profile Image -->
+        <div class="mb-3">
+          <label for="{{ form.profile_image.id_for_label }}" class="form-label">
+            <strong>{{ form.profile_image.label }}</strong>
+          </label>
+          {{ form.profile_image }}
+        </div>
+
+        <!-- Cover Image -->
+        <div class="mb-3">
+          <label for="{{ form.cover_image.id_for_label }}" class="form-label">
+            <strong>{{ form.cover_image.label }}</strong>
+          </label>
+          {{ form.cover_image }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold shadow-sm">Sign Up</button>
+
+      </form>
+
+      <p class="text-center mt-3 text-muted">
+        Already have an account? <a href="{% url 'accounts:login' %}" class="text-decoration-none fw-medium">Login</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
