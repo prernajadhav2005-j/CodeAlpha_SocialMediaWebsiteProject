@@ -1,94 +1,63 @@
 ﻿#CodeAlpha_SocialMediaWebsiteProject
-
-
 📌 Mini Social Media Platform — Django Full-Stack Project
-This project is a fully functional mini social media application built using Django, HTML, CSS, and JavaScript. It includes all essential social media features such as user profiles, posting, liking, commenting, and following other users.
 
-🚀 Features
-👤 User Authentication & Profiles
+📌Project Overview:- This project is a fully functional mini social media application built using Django, HTML, CSS, and JavaScript. It includes all essential social media   
+    features such as user profiles, posting, liking, commenting, and following other users.
 
-User Signup, Login, Logout
+🚀 Features :
+👤 User Authentication & Profiles:
+- User Signup, Login, Logout
+- Automatic profile creation on registration
+- Profile editing (username, image, bio)
+- Delete your own profile
+- Follow/Unfollow users
+- Profile page with follower count
 
-Automatic profile creation on registration
+📝 Posts :
+- Create posts with images/text
+- View posts from all users
+- View posts by specific users
+- Delete your own posts
 
-Profile editing (username, image, bio)
+💬 Comments :
+- Add comments to posts (AJAX-based)
+- Delete only your own comments
 
-Delete your own profile
+❤️ Likes :
+- Like/Unlike posts without page reload (AJAX)
+- Real-time like count update
 
-Follow/Unfollow users
+👥 Follow System :
+- Follow/Unfollow users
+- Updated follower & following count
 
-Profile page with follower count
-
-📝 Posts
-
-Create posts with images/text
-
-View posts from all users
-
-View posts by specific users
-
-Delete your own posts
-
-💬 Comments
-
-Add comments to posts (AJAX-based)
-
-Delete only your own comments
-
-❤️ Likes
-
-Like/Unlike posts without page reload (AJAX)
-
-Real-time like count update
-
-👥 Follow System
-
-Follow/Unfollow users
-
-Updated follower & following count
-
-⚡ AJAX Integration
-
-Used for:
-
-Likes
-
-Comments
-
-Follow/Unfollow
+⚡ AJAX Integration used for :
+ - Likes
+ - Comments
+ - Follow/Unfollow
 This gives the app a smooth, modern user experience.
 
-🛠️ Tech Stack
+🛠️ Tech Stack :
+- Backend: Django (Python)
+- Frontend: HTML, CSS, Bootstrap, JavaScript (AJAX)
+- Database: SQLite / PostgreSQL
+- Image Handling: Django Media Storage
 
-Backend: Django (Python)
+🎯 Purpose :
+- This project demonstrates practical experience in:
+  - Django backend development
+  - REST-like AJAX communication
+  - User authentication systems
+  - Social media features used in real applications
 
-Frontend: HTML, CSS, Bootstrap, JavaScript (AJAX)
+📌 Future Improvements :
+- Real-time notifications
+- Direct messaging / live chat
+- Repost/share functionality
+- Advanced search
+- Profile customization
 
-Database: SQLite / PostgreSQL
+👤Author : Prerna Jadhav
+           Full Stack Developer Intern
 
-Image Handling: Django Media Storage
-
-🎯 Purpose
-
-This project demonstrates practical experience in:
-
-Django backend development
-
-REST-like AJAX communication
-
-User authentication systems
-
-Social media features used in real applications
-
-📌 Future Improvements
-
-Direct messaging
-
-Story feature
-
-Notifications
-
-Dark mode
-
-Real-time chat with Django Channels
 
