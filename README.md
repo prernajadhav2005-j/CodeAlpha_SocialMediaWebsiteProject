@@ -50,15 +50,18 @@ This gives the app a smooth, modern user experience.
   - User authentication systems
   - Social media features used in real applications
 
-📌 Future Improvements :
+📌Future Improvements :
 - Real-time notifications
 - Direct messaging / live chat
 - Repost/share functionality
 - Advanced search
 - Profile customization
 
+📌Result:- https://github.com/user-attachments/assets/60b7d375-d318-4fb2-bd56-9663dbf56882
+
 👤Author : Prerna Jadhav
            Full Stack Developer Intern
+
 
 
 
