@@ -1,4 +1,6 @@
 ﻿#CodeAlpha_SocialMediaWebsiteProject
+
+
 📌 Mini Social Media Platform — Django Full-Stack Project
 This project is a fully functional mini social media application built using Django, HTML, CSS, and JavaScript. It includes all essential social media features such as user profiles, posting, liking, commenting, and following other users.
 
@@ -65,4 +67,28 @@ Frontend: HTML, CSS, Bootstrap, JavaScript (AJAX)
 Database: SQLite / PostgreSQL
 
 Image Handling: Django Media Storage
+
+🎯 Purpose
+
+This project demonstrates practical experience in:
+
+Django backend development
+
+REST-like AJAX communication
+
+User authentication systems
+
+Social media features used in real applications
+
+📌 Future Improvements
+
+Direct messaging
+
+Story feature
+
+Notifications
+
+Dark mode
+
+Real-time chat with Django Channels
 
