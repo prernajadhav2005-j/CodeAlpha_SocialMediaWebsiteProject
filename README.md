@@ -6,12 +6,12 @@
 
 🚀 Features :
 👤 User Authentication & Profiles:
-- User Signup, Login, Logout
-- Automatic profile creation on registration
-- Profile editing (username, image, bio)
-- Delete your own profile
-- Follow/Unfollow users
-- Profile page with follower count
+   - User Signup, Login, Logout
+   - Automatic profile creation on registration
+   - Profile editing (username, image, bio)
+   - Delete your own profile
+   - Follow/Unfollow users
+   - Profile page with follower count
 
 📝 Posts :
 - Create posts with images/text
@@ -59,5 +59,6 @@ This gives the app a smooth, modern user experience.
 
 👤Author : Prerna Jadhav
            Full Stack Developer Intern
+
 
 
